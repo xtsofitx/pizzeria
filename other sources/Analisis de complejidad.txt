@@ -1,0 +1,101 @@
+Analisis de complejidad
+
+Descripción General
+El sistema de pizzería implementado en Java gestiona pedidos a través de dos colas de prioridad representadas por heaps genéricos:
+
+Un max-heap que prioriza los pedidos por precio (pedidosRecibidos).
+
+Un min-heap (implementado como Comparator.negativo) que prioriza los pedidos por cercanía (pedidosPorDespachar).
+
+Las operaciones principales que se realizan sobre estas estructuras son:
+
+Agregar pedidos (RECIBIR)
+
+Atender pedidos (ATENDER)
+
+Despachar pedidos (DESPACHAR)
+
+Análisis por Componente
+Clase Heap<T>
+Método add(T elemento)
+Inserta un elemento al final del heap.
+
+Se reordena con siftUp(), que puede recorrer hasta la raíz del árbol.
+
+Complejidad Temporal: O(log n)
+
+Complejidad Espacial: O(1)
+
+Método poll()
+Intercambia la raíz con el último elemento y lo elimina.
+
+Se reordena con siftDown(), desde la raíz hasta una hoja.
+
+Complejidad Temporal: O(log n)
+
+Complejidad Espacial: O(1)
+
+Métodos peek(), size(), isEmpty()
+Accesos directos a elementos.
+
+Complejidad Temporal: O(1)
+
+Método toList()
+Crea una copia del arreglo interno.
+
+Complejidad Temporal: O(n)
+
+Complejidad Espacial: O(n)
+
+Clase Pizzeria
+Método agregarPedido(...)
+Crea un objeto Pedido y lo inserta al heap pedidosRecibidos.
+
+Complejidad Temporal: O(log n)
+
+Método atenderPedido()
+Extrae el pedido con mayor precio (O(log n)).
+
+Lo inserta en el heap de despachos (O(log n)).
+
+Complejidad Temporal Total: O(log n)
+
+Método despacharPedido()
+Extrae el pedido con menor cercanía.
+
+Complejidad Temporal: O(log n)
+
+Métodos pedidosRecibidosList() y colaDespachosList()
+Devuelven una copia de los elementos del heap.
+
+Complejidad Temporal: O(n)
+
+Complejidad Espacial: O(n)
+
+Clase Pedido
+Clase simple con tres atributos (autorPedido, precio, cercania) y métodos getter.
+
+No realiza operaciones complejas.
+
+Complejidad Temporal: O(1)
+
+Complejidad Espacial: O(1)
+
+Complejidad Total del Sistema
+Dado un archivo de entrada con n comandos:
+
+
+Operación	Tiempo por operación	Tiempo total para n operaciones
+RECIBIR	O(log n)	O(n log n)
+ATENDER	O(log n)	O(n log n)
+DESPACHAR	O(log n)	O(n log n)
+Complejidad Temporal Global: O(n log n)
+
+Complejidad Espacial Global: O(n) (almacén de pedidos)
+
+Conclusión
+El sistema de pizzería implementa eficientemente las operaciones de recepción, atención y despacho de pedidos utilizando estructuras de datos apropiadas. Las operaciones críticas mantienen una complejidad logarítmica, garantizando buen rendimiento incluso con una cantidad significativa de pedidos.
+
+Este diseño ofrece una solución escalable y ordenada para priorizar tareas basadas en múltiples criterios (precio y cercanía), aprovechando el poder de los heaps.
+
+
